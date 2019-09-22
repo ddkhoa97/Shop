@@ -10,9 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- jQuery -->
-   
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <base href="{{asset(' ')}}" />
+   
     <title>Admin</title>
   
   
@@ -106,11 +107,7 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <i class="mdi mdi-email-outline mx-0"></i>
-              <span class="count"></span>
-            </a>
+                  
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
                             <div class="dropdown-item">
                                 <p class="mb-0 font-weight-normal float-left">You have 7 unread mails
@@ -171,10 +168,14 @@
                 Settings
               </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item">
-                <i class="mdi mdi-logout text-primary"></i>
-                Logout
-              </a>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                         </div>
                     </li>
                     <li class="nav-item nav-settings d-none d-lg-block">
@@ -390,13 +391,13 @@
               <span class="menu-title">KHÁCH HÀNG</span>
             </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#">
               <i class="mdi mdi-airplay menu-icon"></i>
               <span class="menu-title">NHÂN VIÊN</span>
             </a>
                     </li>
-                
+                 -->
             
                    
                 </ul>
@@ -430,12 +431,13 @@
   <script src="source2/www.urbanui.com/serein/template/js/template.js"></script>
   <script src="source2/www.urbanui.com/serein/template/js/settings.js"></script>
   <script src="source2/www.urbanui.com/serein/template/js/todolist.js"></script>
+  <script src="source2/www.urbanui.com/serein/template/js/chart.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="source2/www.urbanui.com/serein/template/js/data-table.js"></script>
     <!-- End custom js for this page-->
     <script src="source2/www.urbanui.com/serein/template/js/dropify.js"></script>
-  
+    
 </body>
 
 </html>

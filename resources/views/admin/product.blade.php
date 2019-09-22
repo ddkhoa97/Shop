@@ -149,9 +149,7 @@
                   </div>
                   <!-- Modal Ends -->
                      <!-- Modal starts -->
-                     <div class="text-center">
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal-2">Click for demo<i class="mdi mdi-play-circle ml-1"></i></button>
-                  </div>
+                   
                   <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">

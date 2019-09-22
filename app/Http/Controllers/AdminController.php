@@ -9,12 +9,120 @@ use App\Type;
 use App\Bill;
 use App\Customer;
 use App\BillDetail;
+use PDF;
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+    $this->middleware('auth');
+    }
     public function index()
     {
-        
-        return view('admin.index');
+        $bill=Bill::count();
+        $quantity=BillDetail::count('quantity');
+        $total=Bill::sum('total');
+        $customer=Customer::count();
+          $Jan = Bill::whereMonth('created_at', 1)->sum('total');
+            $Feb = Bill::whereMonth('created_at', 2)
+                ->sum('total') + 0;
+            $Mar = Bill::whereMonth('created_at', 3)
+                ->sum('total') + 0;
+            $Apr = Bill::whereMonth('created_at', 4)
+                ->sum('total') + 0;
+            $May = Bill::whereMonth('created_at', 5)
+                ->sum('total') + 0;
+
+                
+            $Jun = Bill::whereMonth('created_at', 6)
+                ->sum('total') + 0;
+            $Jul = Bill::whereMonth('created_at', 7)
+                ->sum('total') + 0;
+            $Aug = Bill::whereMonth('created_at', 8)
+                ->sum('total') + 0;
+            $Sept = Bill::whereMonth('created_at', 9)
+                ->sum('total') + 0;
+            $Oct = Bill::whereMonth('created_at', 10)
+                ->sum('total') + 0;
+            $Nov = Bill::whereMonth('created_at', 11)
+                ->sum('total') + 0;
+            $Dec = Bill::whereMonth('created_at', 12)
+                ->sum('total') + 0;
+            $Month = array(
+                $Jan,
+                $Feb,
+                $Mar,
+                $Apr,
+                $May,
+                $Jun,
+                $Jul,
+                $Aug,
+                $Sept,
+                $Oct,
+                $Nov,
+                $Dec
+                
+            );
+            $time = date("m");
+            $time = (int) $time;
+            for ($i = 0; $i < 12; $i ++) {
+                if ($i >= $time) {
+                    $Month[$i] = 0;
+                }
+            }
+            $result = json_encode(array(
+                 
+                    [
+                        "Jan",
+                        $Month[0]
+                    ],
+                    [
+                        "Feb",
+                        $Month[1]
+                    ],
+                    [
+                        "Mar",
+                        $Month[2]
+                    ],
+                    [
+                        "Apr",
+                        $Month[3]
+                    ],
+                    [
+                        "May",
+                        $Month[4]
+                    ],
+                    [
+                        "Jun",
+                        $Month[5]
+                    ],
+                    [
+                        "Jul",
+                        $Month[6]
+                    ],
+                    [
+                        "Aug",
+                        $Month[7]
+                    ],
+                    [
+                        "Sept",
+                        $Month[8]
+                    ],
+                    [
+                        "Oct",
+                        $Month[9]
+                    ],
+                    [
+                        "Nov",
+                        $Month[10]
+                    ],
+                    [
+                        "Dec",
+                        $Month[11]
+                    
+                ]
+            ));
+           
+        return view('admin.index',compact('bill','quantity','total','customer','result'));
     }
     public function product()
     {
@@ -95,11 +203,30 @@ class AdminController extends Controller
         $id_customer=Bill::where('id',$id)->select('id_customer')->first();
         $total=Bill::where('id',$id)->select('id_customer')->select('total')->first();
         $total=$total['total'];
-    //  dd($id_customer['id_customer']);
+    
         $time=Bill::where('id',$id)->select('created_at')->get();
        
         $customer=Customer::where('id','=',$id_customer['id_customer'])->select('*')->get();
         
         return view('admin.detailbill',compact('result','customer','total','time','id_bill'));   
+    }
+    public function PrintPDF($id)
+    { 
+        
+        $id_bill=$id;
+      
+        $result=BillDetail::leftjoin('bill','bill.id','=','detail_bill.id_bill')->leftjoin('customer','customer.id','=','bill.id_customer')->where('id_bill',$id_bill)->get();
+        $id_customer=Bill::where('id',$id)->select('id_customer')->first();
+        $total=Bill::where('id',$id)->select('id_customer')->select('total')->first();
+        $total=$total['total'];
+    
+        $time=Bill::where('id',$id)->select('created_at')->get();
+       
+        $customer=Customer::where('id','=',$id_customer['id_customer'])->select('*')->get();
+        
+      $pdf = PDF::loadView('admin.dpf',compact('result','customer','total','time','id_bill'));   
+      
+        return $pdf->download('data.pdf');
+     
     }
 }

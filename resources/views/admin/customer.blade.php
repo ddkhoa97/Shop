@@ -24,9 +24,7 @@
                             <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 141px;">Zip</th>
                             <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 141px;">Email</th>
                             <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 141px;">Phone</th>
-                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 112px;">Status</th>
-                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 118px;">Actions</th></tr>
-                      </thead>
+                           </thead>
                       <tbody>
                         
                         
@@ -48,12 +46,7 @@
                           <td>{{$r->zip}}</td>
                           <td>{{$r->email}}</td>
                           <td>{{$r->phone}}</td>
-                            <td>
-                              <label class="badge badge-info">On hold</label>
-                            </td>
-                            <td>
-                              <button class="btn btn-outline-primary">View</button>
-                            </td>
+                           
                         </tr>
                      @endforeach
                       

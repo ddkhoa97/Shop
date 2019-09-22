@@ -206,6 +206,7 @@
     <script src="source/js/smoothscroll.js"></script>
 	<!-- settings -->
     <script type="text/javascript" src="source/js/setting.js"></script>
+    
     <script>
     $('#checkout').click(function(e) {
         var $this = $(this);

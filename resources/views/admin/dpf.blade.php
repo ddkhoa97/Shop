@@ -1,20 +1,13 @@
-@extends('admin.master')
-@section('content')
-<div class="content-wrapper">
+<link rel="stylesheet" href="../source2/www.urbanui.com/serein/template/css/vertical-layout-light/style.css" />
 
-          <div class="row">
-              <div class="col-lg-12">
-              
+          <div class="row" >
+              <div class="col-lg-12">        
                   <div class="card px-2">
                       <div class="card-body">
                           <div class="container-fluid">
-                         
-                          <button class="btn btn-outline-danger ti-arrow-left" onclick="quay_lai_trang_truoc()"> Back</button> </a>
-                          
-                            <h3 class="text-right my-5">Invoice&nbsp;&nbsp;#{{$id_bill}}</h3>
-                         
-                            <hr>
-                        
+            
+                            <h3 class="text-right my-5">Invoice&nbsp;&nbsp;#{{$id_bill}}</h3>            
+                            <hr>           
                           </div>
                           @foreach($customer as $ctm)
                           <div class="container-fluid d-flex justify-content-between">
@@ -26,9 +19,6 @@
                               <p>{{$ctm->email}}</p>
                               <p>{{$ctm->phone}}</p>
                             </div>
-                            
-                         
-                         
                             <div class="col-lg-3 pl-0">
                               @foreach($time as $time)
                               <p class="mb-0 mt-5">Invoice Date : {{$time->created_at}}</p>
@@ -77,24 +67,10 @@
                        
                             <hr>
                           </div>
-                          <div class="container-fluid w-100">
-                        
-                            <a href="{{url('PrintPDF', $id_bill)}}" class="btn btn-primary float-right mt-4 ml-2"><i class="mdi mdi-printer mr-1"></i>Print</a>
-                            <a href="#" class="btn btn-success float-right mt-4"><i class="mdi mdi-telegram mr-1"></i>Send Invoice</a>
-                          </div>
+                         
                       </div>
                   </div>
               </div>
           </div>
-        </div>
+       
 
-      
-
-        <script>
-   function quay_lai_trang_truoc(){
-       history.go(-1);
-   }
-</script>
-
-
-@stop

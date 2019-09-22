@@ -102,3 +102,12 @@ Route::get('detailBill/{id?}',
 'as'=>'DetailBill',
 'uses'=>'AdminController@DetailBill'
 ]);
+Route::get('PrintPDF/{id}',
+[
+'as'=>'PrintPDF',
+'uses'=>'AdminController@PrintPDF'
+]);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
